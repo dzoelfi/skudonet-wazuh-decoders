@@ -1,0 +1,12 @@
+<!-- 
+  - Skudonet WAF Log Rules
+  - Author: Dzulfikar.
+  - Copyright (C) 2024.
+-->
+
+<group name="skudonet, waf, syslog">
+  <rule id="200002" level="4">
+   <decoded_as>skudonet</decoded_as>
+   <description>Log WAF Skudonet</description>
+  </rule>
+</group>

@@ -1,0 +1,76 @@
+<!-- 
+  - Skudonet WAF Log Decoders
+  - Author: Dzulfikar.
+  - Copyright (C) 2024.
+-->
+
+<!--
+    This decoder will extract
+    - info
+    - farm
+    - services
+    - srcip
+    - dstip
+    - action
+    - description
+ -->
+
+<!-- Define the base decoder for skudonet logs -->
+<decoder name="skudonet">
+  <program_name>pound</program_name>
+</decoder>
+
+<!-- Capture the farm name -->
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>^(\w+),</regex>
+  <order>farm</order>
+</decoder>
+
+<!-- Capture the service name -->
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>service (\S+),</regex>
+  <order>service</order>
+</decoder>
+
+<!-- Info -->
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>ModSecurity: (\.+).</regex>
+  <order>type</order>
+</decoder>
+
+<!-- Capture the requester's IP -->
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>from (\w+.\w+.\w+.\w+)</regex>
+  <order>srcip</order>
+</decoder>
+
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>client (\w+.\w+.\w+.\w+)</regex>
+  <order>srcip</order>
+</decoder>
+
+<!-- Capture the backend IP -->
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>backend (\w+.\w+.\w+.\w+)</regex>
+  <order>dstip</order>
+</decoder>
+
+<!-- Capture the WAF action -->
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>WAF (\.+)</regex>
+  <order>action</order>
+</decoder>
+
+<!-- Descriptions -->
+<decoder name="skudonet">
+  <parent>skudonet</parent>
+  <regex>msg (\.+)]</regex>
+  <order>descriptions</order>
+</decoder>
